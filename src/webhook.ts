@@ -28,10 +28,7 @@ webhook.on('issues', async ({ payload }) => {
   if (issue.labels?.some((l) => l.name === 'spam')) {
     await blockUser(issue.user.login);
     if (issue.state !== 'closed') {
-      await Promise.all([
-        closeIssue(repo, issue),
-        lockSpamIssue(repo, issue)
-      ]);
+      await Promise.all([closeIssue(repo, issue), lockSpamIssue(repo, issue)]);
     }
     return;
   }
@@ -46,10 +43,7 @@ webhook.on('pull_request', async ({ payload }) => {
         owner: payload.repository.owner.login,
         repo: payload.repository.name,
       };
-      await Promise.all([
-        closePR(repo, pr),
-        lockSpamPR(repo, pr)
-      ]);
+      await Promise.all([closePR(repo, pr), lockSpamPR(repo, pr)]);
     }
   }
 });
@@ -57,13 +51,16 @@ webhook.on('pull_request', async ({ payload }) => {
 webhook.on('workflow_run', async ({ payload }) => {
   if (payload.action === 'completed') {
     await purgeOutdatedCache();
-    if (payload.workflow_run.conclusion == 'failure' && payload.workflow_run.run_attempt < 3) {
+    if (
+      payload.workflow_run.conclusion == 'failure' &&
+      payload.workflow_run.run_attempt < 3
+    ) {
       // Automatically retry on failure, at most 3 times
       const repo = {
         owner: payload.repository.owner.login,
         repo: payload.repository.name,
       };
-      await rerunAction(repo, payload.workflow_run.id)
+      await rerunAction(repo, payload.workflow_run.id);
     }
   }
 });

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import server from './webhook.js';
 import updateCountJson from './count.js';
 

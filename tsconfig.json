@@ -3,9 +3,7 @@
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./dist",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "module": "node18",
     "noErrorTruncation": true
   }
