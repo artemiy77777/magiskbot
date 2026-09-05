@@ -10,8 +10,6 @@ import {
   blockUser,
   closeIssue,
   closePR,
-  commentIssue,
-  getVersionCode,
   lockSpamIssue,
   lockSpamPR,
   rerunAction,
@@ -36,23 +34,6 @@ webhook.on('issues', async ({ payload }) => {
       ]);
     }
     return;
-  }
-  if (payload.action === 'opened') {
-    const versionCodeLine = issue.body
-      ?.split('\n')
-      .filter((s) => s.startsWith('Magisk version code:'))
-      .at(-1);
-
-    const ver = await getVersionCode();
-    if (!versionCodeLine?.includes(ver)) {
-      const msg =
-        'Invalid bug report, automatically closed.\n' +
-        `Please report issues using the latest debug Magisk build (version code: ${ver}).`;
-      await Promise.all([
-        commentIssue(repo, issue, msg),
-        closeIssue(repo, issue),
-      ]);
-    }
   }
 });
 

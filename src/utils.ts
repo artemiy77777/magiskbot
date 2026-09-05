@@ -1,4 +1,3 @@
-import { GetResponseDataTypeFromEndpointMethod } from '@octokit/types';
 import { Issue, PullRequest } from '@octokit/webhooks-types';
 import { ghOwner as gh, ghBot } from './env.js';
 
@@ -48,31 +47,6 @@ export async function commentIssue(
     issue_number: issue.number,
     body,
   });
-}
-
-type GhContentType = Unpacked<
-  GetResponseDataTypeFromEndpointMethod<typeof ghBot.repos.getContent>
->;
-
-export async function getVersionCode(): Promise<string> {
-  const props = (
-    await ghBot.repos.getContent({
-      owner: 'topjohnwu',
-      repo: 'Magisk',
-      path: 'app/gradle.properties',
-    })
-  ).data as GhContentType;
-
-  if (props.type === 'file' && 'encoding' in props) {
-    return Buffer.from(props.content, props.encoding as BufferEncoding)
-      .toString()
-      .split('\n')
-      .filter((s) => s.startsWith('magisk.versionCode'))
-      .at(-1)!
-      .replace('magisk.versionCode=', '');
-  }
-
-  return '';
 }
 
 export async function lockSpamIssue(repo: GithubRepo, issue: Issue) {
