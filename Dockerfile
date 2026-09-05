@@ -1,6 +1,6 @@
 FROM debian:latest as builder
 
-ARG NODE_VERSION=25.2.1
+ARG NODE_VERSION=26.8.1
 
 RUN apt-get update; apt install -y curl libatomic1
 RUN curl https://get.volta.sh | bash

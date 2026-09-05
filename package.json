@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "engines": {
-    "node": "v25.x"
+    "node": "^26.0.0"
   },
   "scripts": {
     "start": "tsx src/index.ts",
@@ -14,21 +14,22 @@
   },
   "author": "topjohnwu",
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@tsconfig/node24": "^24.0.3",
-    "@types/node": "^24.10.1",
-    "eslint": "^9.39.1",
-    "prettier": "3.7.4",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "typescript-eslint": "^8.48.1"
+    "@eslint/js": "^10.0.1",
+    "@tsconfig/node24": "^24.0.5",
+    "@types/node": "^26.4.1",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "eslint": "^10.10.0",
+    "prettier": "3.9.6",
+    "tsx": "^4.23.13",
+    "typescript": "npm:@typescript/typescript6@^6.0.2",
+    "typescript-eslint": "^8.69.0"
   },
   "dependencies": {
     "@octokit/rest": "^22.0.1",
-    "@octokit/types": "^16.0.0",
+    "@octokit/types": "^18.0.0",
     "@octokit/webhooks": "^14.2.0",
     "@octokit/webhooks-types": "^7.6.1",
-    "fastify": "^5.6.2"
+    "fastify": "^5.12.3"
   },
   "prettier": {
     "singleQuote": true
